@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+
+        // Hello World Web workers
+
+        var worker = new Worker('worker.js');
+
+        worker.onmessage = function (event) {
+            // get data back from the worker
+            // this data is available inside the event object as
+            // event.data
+            console.log('Worker says: ' + event.data);
+        };
+
+        // launch the worker
+        //worker.postMessage('Jacob');
+
+        document.addEventListener('DOMContentLoaded', function () {
+            worker.postMessage('asdf');
+        });
+
+    </script>
+</head>
+<body>
+
+<input type="text"/>
+
+</body>
+</html>

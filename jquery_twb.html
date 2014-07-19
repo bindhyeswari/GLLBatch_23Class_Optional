@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="base.css"/>
+    <script src="jquery.js"></script>
+    <style>
+        div {
+            margin: 1em;
+            padding: 1em;
+            background-color: #eee;
+        }
+
+    </style>
+    <script>
+
+        var model = 'Hello World';
+        var model_changed = 'Hello World';
+        // change event on the model
+
+        $(function () {
+            $('[data-model="message"]').keypress(function (event) {
+                model_changed = (this.value + String.fromCharCode(event.charCode));
+            });
+
+            // dirty checking ...
+            setInterval(function(){
+                if (model_changed !== model) {
+                    // publish a change event
+                    model = model_changed;
+                    $('[data-bind="message"]').html(model);
+                    // todo: fix this code for two way binding
+                    $('[data-model="message"]').val(model);
+                }
+            }, 10);
+
+            $('button').eq(0).click(function () {
+                model_changed = 'Hello from me!!!';
+            });
+        });
+    </script>
+</head>
+<body>
+<button>Say Hi</button>
+    <input type="text" data-model="message"/>
+    <div data-bind="message"></div>
+    <input type="text" data-model="message"/>
+<table>
+    <tr>
+        <td>asdfsadf</td>
+        <td data-bind="message"></td>
+    </tr>
+</table>
+</body>
+</html>
